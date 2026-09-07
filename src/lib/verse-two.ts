@@ -320,21 +320,9 @@ function isV2(barIndex: number) {
 }
 
 function v1Chairs(recipe: Recipe, chair: ChairId): boolean {
-  switch (recipe.id) {
-    case "held-pad":
-      return chair !== "strings" && chair !== "guitar";
-    case "extra-chair":
-      return chair !== "guitar";
-    case "harmony-stack":
-      return chair !== "strings";
-    case "new-figure":
-    case "answer-guitar":
-      return chair !== "guitar";
-    case "counter-line":
-      return chair !== "horn";
-    default:
-      return chair !== "strings" && chair !== "guitar";
-  }
+  if (chair === "guitar" || chair === "strings") return false;
+  if (recipe.id === "counter-line" && chair === "horn") return false;
+  return true;
 }
 
 function v2Chairs(recipe: Recipe, chair: ChairId, barInV2: number): boolean {
